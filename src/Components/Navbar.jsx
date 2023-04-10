@@ -1,68 +1,139 @@
-import React from "react";
-import logo from "../assets/logo.svg";
+import React, { useState } from "react";
+import {
+  FaBars,
+  FaTimes,
+  FaGithub,
+  FaLinkedin,
+  FaFacebook,
+  FaLinkedinIn,
+} from "react-icons/fa";
+import { HiOutlineMail } from "react-icons/hi";
+import { BsFillPersonLinesFill } from "react-icons/bs";
+import Logo from "../assets/logo.png";
+import { Link } from "react-scroll";
 
-function Navbar() {
+const Navbar = () => {
+  const [nav, setNav] = useState(false);
+  const handleClick = () => setNav(!nav);
+
   return (
-    <>
-      <nav className="relative container mx-auto p-6">
-        {/* Flex container  */}
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div className="pt-2">
-            <img src={logo} alt="" />
-          </div>
-          <div className="hidden space-x-6 md:flex">
-            <a href="/" className="hover:text-darkGrayishBlue">
-              Pricing
-            </a>
-            <a href="/" className="hover:text-darkGrayishBlue">
-              Product
-            </a>
-            <a href="/" className="hover:text-darkGrayishBlue">
-              About Us
-            </a>
-            <a href="/" className="hover:text-darkGrayishBlue">
-              Careers
-            </a>
-            <a href="/" className="hover:text-darkGrayishBlue">
-              Community
-            </a>
-          </div>
-          {/* <!-- Button --> */}
-          <a
-            href="/"
-            className="hidden p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight md:block"
-          >
-            Get Started
-          </a>
+    <div className="fixed w-full h-16 flex justify-between items-center px-4 bg-[#0a192f] text-gray-300">
+      <div>
+        <img src={Logo} alt="Logo Imag" className="w-52" />
+      </div>
 
-          {/* <!-- Hamburger Icon --> */}
-          <button
-            id="menu-btn"
-            className="block hamburger md:hidden focus:outline-none"
-          >
-            <span className="hamburger-top"></span>
-            <span className="hamburger-middle"></span>
-            <span className="hamburger-bottom"></span>
-          </button>
-        </div>
+      {/* menu */}
+      <ul className="hidden md:flex">
+        <li>
+          <Link to="home" smooth={true} duration={500}>
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link to="about" smooth={true} duration={500}>
+            About
+          </Link>
+        </li>
+        <li>
+          <Link to="skills" smooth={true} duration={500}>
+            Skills
+          </Link>
+        </li>
+        <li>
+          <Link to="work" smooth={true} duration={500}>
+            Work
+          </Link>
+        </li>
+        <li>
+          <Link to="contact" smooth={true} duration={500}>
+            Contact
+          </Link>
+        </li>
+      </ul>
 
-        {/* <!-- Mobile Menu --> */}
-        <div className="md:hidden">
-          <div
-            id="menu"
-            className="absolute flex-col items-center hidden self-end py-8 mt-10 space-y-6 font-bold bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md"
-          >
-            <a href="/">Pricing</a>
-            <a href="/">Product</a>
-            <a href="/">About Us</a>
-            <a href="/">Careers</a>
-            <a href="/">Community</a>
-          </div>
-        </div>
-      </nav>
-    </>
+      {/* Hamburger */}
+      <div onClick={handleClick} className="md:hidden z-10">
+        {!nav ? <FaBars /> : <FaTimes />}
+      </div>
+
+      {/* Mobile menu */}
+      <ul
+        className={
+          !nav
+            ? "hidden"
+            : "absolute top-0 left-0 w-full h-screen bg-[#0a192f] flex flex-col justify-center items-center"
+        }
+      >
+        <li className="py-6 text-4xl">
+          <Link onClick={handleClick} to="home" smooth={true} duration={500}>
+            Home
+          </Link>
+        </li>
+        <li className="py-6 text-4xl">
+          {" "}
+          <Link onClick={handleClick} to="about" smooth={true} duration={500}>
+            About
+          </Link>
+        </li>
+        <li className="py-6 text-4xl">
+          {" "}
+          <Link onClick={handleClick} to="skills" smooth={true} duration={500}>
+            Skills
+          </Link>
+        </li>
+        <li className="py-6 text-4xl">
+          {" "}
+          <Link onClick={handleClick} to="work" smooth={true} duration={500}>
+            Work
+          </Link>
+        </li>
+        <li className="py-6 text-4xl">
+          {" "}
+          <Link onClick={handleClick} to="contact" smooth={true} duration={500}>
+            Contact
+          </Link>
+        </li>
+      </ul>
+
+      {/* Social icons */}
+      <div className="hidden lg:flex fixed flex-col top-[35%] left-0">
+        <ul>
+          <li className="w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-300 bg-blue-600">
+            <a
+              className="flex justify-between items-center w-full text-gray-300"
+              href="/"
+            >
+              Linkedin <FaLinkedin size={30} />
+            </a>
+          </li>
+          <li className="w-[160px] h-[60px] flex justify-between items-center ml-24 hover:ml-2.5 duration-300 bg-[#333333]">
+            <a
+              className="flex justify-between items-center w-full text-gray-300"
+              href="/"
+            >
+              Github <FaGithub size={30} />
+            </a>
+          </li>
+          <li className="w-[160px] h-[60px] flex justify-between items-center ml-24 hover:ml-2.5 duration-300 bg-[#6fc2b0]">
+            <a
+              className="flex justify-between items-center w-full text-gray-300"
+              href="/"
+            >
+              Email <HiOutlineMail size={30} />
+            </a>
+          </li>
+          <li className="w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-300 bg-[#565f69]">
+            <a
+              className="flex justify-between items-center w-full text-gray-300"
+              href="/"
+            >
+              Resume <BsFillPersonLinesFill size={30} />
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
   );
-}
+};
 
 export default Navbar;
